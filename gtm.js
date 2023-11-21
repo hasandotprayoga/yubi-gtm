@@ -1,10 +1,5 @@
-function extractIdFromUrl() {
-  const urlParams = new URLSearchParams(window.location.search)
-  return urlParams.get('id')
-}
-
 // Function to make HTTP request
-function fetchData(id) {
+function setProductId(id) {
   // Check if 'id' is provided
   if (!id) {
     console.error('ID parameter is required.')
@@ -45,6 +40,3 @@ function setupGoogleTagManager(googleAnalyticsId) {
   gtag('js', new Date())
   gtag('config', googleAnalyticsId)
 }
-
-const idFromUrl = extractIdFromUrl()
-fetchData(idFromUrl)

@@ -3,9 +3,9 @@
            const urlParams = new URLSearchParams(window.location.search);
 
 // Get the value of a specific parameter
-const id = urlParams.get('param1');
+const id = urlParams.get('id');
 
-         
+         console.log(id)
          
             fetch('https://gateway.yukbisnis.dev/v1/analytic?status=ACTIVE&type=GOOGLE_ANALYTIC&idProduct=' + id)
                 .then(response => response.json())

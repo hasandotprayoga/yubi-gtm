@@ -1,48 +1,32 @@
-// script.js
+// gtm.js
+
+// Function to extract the 'id' parameter from the URL
+function extractIdFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('id');
+}
 
 // Function to make HTTP request
 function fetchData(id) {
-  // Check if 'id' is provided
-  if (!id) {
-    console.error('ID parameter is required.')
-    return
-  }
+    if (!id) {
+        console.error('ID parameter is required.');
+        return;
+    }
 
-  console.log('ID:', id)
+    console.log('ID:', id);
 
-  // Make the HTTP request using the provided 'id' parameter
-  fetch(`https://gateway.yukbisnis.dev/v1/analytic?status=ACTIVE&type=GOOGLE_ANALYTIC&idProduct=${id}`)
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.response.results.items.length > 0) {
-        // Extract Google Analytics ID from the response
-        const googleAnalyticsId = data.response.results.items[0].AnalyticValue
-
-        // Call function to set up Google Tag Manager with the retrieved ID
-        setupGoogleTagManager(googleAnalyticsId)
-      }
-    })
-    .catch((error) => console.error('Error fetching data:', error))
+    // Use the provided 'id' parameter in your logic
+    // For example, you can use it in your URL or any other way you need
+    // Modify the following line as per your requirements
+    fetch(`https://example.com/api/data?id=${id}`)
+        .then(response => response.json())
+        .then(data => {
+            // Process the data as needed
+            console.log('Data:', data);
+        })
+        .catch(error => console.error('Error fetching data:', error));
 }
 
-// Function to set up Google Tag Manager with the Google Analytics ID
-function setupGoogleTagManager(googleAnalyticsId) {
-  // Google Tag Manager container code
-  ;(function (w, d, s, l, i) {
-    var f = d.getElementsByTagName(s)[0],
-      j = d.createElement(s),
-      dl = l != 'dataLayer' ? '&l=' + l : ''
-    j.async = true
-    j.src = 'https://www.googletagmanager.com/gtag/js?id=' + i + dl
-    f.parentNode.insertBefore(j, f)
-  })(window, document, 'script', 'dataLayer', googleAnalyticsId)
-
-  window.dataLayer = window.dataLayer || []
-  function gtag() {
-    dataLayer.push(arguments)
-  }
-  gtag('js', new Date())
-  gtag('config', googleAnalyticsId)
-}
-
-// You can also define other functions or code in this file
+// Extract 'id' from the URL and call the fetchData function
+const idFromUrl = extractIdFromUrl();
+fetchData(idFromUrl);

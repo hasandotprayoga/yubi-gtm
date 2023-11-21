@@ -1,5 +1,12 @@
  // Function to make HTTP request
-        function setProduct(id) {
+        function fetchData() {
+           const urlParams = new URLSearchParams(window.location.search);
+
+// Get the value of a specific parameter
+const id = urlParams.get('param1');
+
+         
+         
             fetch('https://gateway.yukbisnis.dev/v1/analytic?status=ACTIVE&type=GOOGLE_ANALYTIC&idProduct=' + id)
                 .then(response => response.json())
                 .then(data => {
@@ -33,4 +40,4 @@
             gtag('config', googleAnalyticsId);
         }
 
-        export { setProduct };
+        fetchData()

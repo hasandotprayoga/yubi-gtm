@@ -1,13 +1,18 @@
 // Function to make HTTP request
-function setProductId(id) {
+function setProductGTM(id, prod = false) {
   // Check if 'id' is provided
   if (!id) {
     console.error('ID parameter is required.')
     return
   }
 
+  let baseUrl = 'https://gateway.yukbisnis.dev'
+  if (prod) {
+    baseUrl = 'https://gateway.yubiapi.net'
+  }
+
   // Make the HTTP request using the provided 'id' parameter
-  fetch(`https://gateway.yukbisnis.dev/v1/analytic?status=ACTIVE&type=GOOGLE_ANALYTIC&idProduct=${id}`)
+  fetch(`${baseUrl}/v1/analytic?status=ACTIVE&type=GOOGLE_ANALYTIC&idProduct=${id}`)
     .then((response) => response.json())
     .then((data) => {
       if (data.response.results.items.length > 0) {
